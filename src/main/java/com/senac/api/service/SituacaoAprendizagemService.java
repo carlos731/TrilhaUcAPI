@@ -20,7 +20,6 @@ public class SituacaoAprendizagemService {
 		situacaoAprendizagem.setId(null);
 		situacaoAprendizagem = situacaoAprendizagemRepository.save(situacaoAprendizagem);
 		situacaoAprendizagem.setId(situacaoAprendizagem.getId());
-		System.out.println("Situacao_aprendizagem_id: " + situacaoAprendizagem.getId());
 		return situacaoAprendizagem;
 	}
 	
@@ -33,7 +32,7 @@ public class SituacaoAprendizagemService {
 		Optional<SituacaoAprendizagem> situacaoAprendizagem = situacaoAprendizagemRepository.findById(id);
 		
 		if(situacaoAprendizagem.isEmpty()) {
-			throw new ObjectnotFoundException("CURSO COM ID : '" + id + "' NÃO ENCONTRADO!");
+			throw new ObjectnotFoundException("SITUAÇÃO APRENDIZAGEM COM ID : '" + id + "' NÃO ENCONTRADO!");
 		}
 
 		return situacaoAprendizagem;
@@ -43,7 +42,7 @@ public class SituacaoAprendizagemService {
 		Optional<SituacaoAprendizagem> situacaoAprendizagemId = situacaoAprendizagemRepository.findById(id);
 		
 		if(situacaoAprendizagemId.isEmpty()) {
-			throw new ObjectnotFoundException("CURSO COM ID: '" + id + "' NÃO ENCONTRADO!");
+			throw new ObjectnotFoundException("SITUAÇÃO APRENDIZAGEM COM ID: '" + id + "' NÃO ENCONTRADO!");
 		}
 		
 		situacaoAprendizagem.setId(id);

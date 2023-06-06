@@ -7,14 +7,12 @@ import com.senac.api.entity.GrauDificuldade;
 import com.senac.api.entity.ObjetoAprendizagem;
 import com.senac.api.entity.PlanejamentoUc;
 
-import jakarta.persistence.Column;
-
 public class SituacaoAprendizagemResponse{
 
 	private Long id;
 	private String titulo;
 	private String descricao;
-	private Boolean ordem;
+	private Integer ordem;
 	private LocalDate inicio;
 	private LocalDate fim;
 	private Integer duracao;
@@ -42,10 +40,10 @@ public class SituacaoAprendizagemResponse{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Boolean getOrdem() {
+	public Integer getOrdem() {
 		return ordem;
 	}
-	public void setOrdem(Boolean ordem) {
+	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
 	public LocalDate getInicio() {

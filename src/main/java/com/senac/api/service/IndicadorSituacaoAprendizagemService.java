@@ -62,4 +62,14 @@ public class IndicadorSituacaoAprendizagemService {
 		indicadorSituacaoAprendizagemRepository.deleteById(id);
 	}
 	
+	public void deletarBySituacao(Long id) {
+		Optional<IndicadorSituacaoAprendizagem> indicadorSituacaoAprendizagem = indicadorSituacaoAprendizagemRepository.findBySituacao(id);
+		
+		if(indicadorSituacaoAprendizagem.isEmpty()) {
+			throw new ObjectnotFoundException("SITUACAO APRENDIZAGEM COM ID: '\" + id + \"' NÃO ENCONTRADO!");
+		}
+		
+		indicadorSituacaoAprendizagemRepository.deleteById(indicadorSituacaoAprendizagem.get().getId());
+	}
+	
 }

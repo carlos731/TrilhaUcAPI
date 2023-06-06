@@ -10,7 +10,7 @@ public class SituacaoAprendizagemRequest{
 	@NotNull(message = "O campo descricao deve ser preenchido!!")
 	private String descricao;
 	@NotNull(message = "O campo ordem deve ser preenchido!!")
-	private Boolean ordem;
+	private Integer ordem;
 	@NotNull(message = "O campo duração deve ser preenchido!!")
 	private Integer duracao;
 	@NotNull(message = "O campo status deve ser preenchido!!")
@@ -21,6 +21,8 @@ public class SituacaoAprendizagemRequest{
 	private Long grauDificuldadeId;
 	@NotNull(message = "O campo badge deve ser preenchido!!")
 	private Long badgeId;
+	@NotNull(message = "O campo indicador deve ser preenchido!!")
+	private Long indicadorId;
 	
 	public Long getId() {
 		return id;
@@ -40,10 +42,10 @@ public class SituacaoAprendizagemRequest{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Boolean getOrdem() {
+	public Integer getOrdem() {
 		return ordem;
 	}
-	public void setOrdem(Boolean ordem) {
+	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
 	public Integer getDuracao() {
@@ -76,5 +78,12 @@ public class SituacaoAprendizagemRequest{
 	public void setBadgeId(Long badgeId) {
 		this.badgeId = badgeId;
 	}
-
+	public Long getIndicadorId() {
+		return indicadorId;
+	}
+	public void setIndicadorId(Long indicadorId) {
+		this.indicadorId = indicadorId;
+	}
+	
+	
 }

@@ -25,9 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.senac.api.entity.GrauDificuldade;
 import com.senac.api.entity.ObjetoAprendizagem;
+import com.senac.api.entity.SituacaoAprendizagem;
+import com.senac.api.entity.SituacaoObjetoAprendizagem;
 import com.senac.api.request.ObjetoAprendizagemRequest;
 import com.senac.api.response.ObjetoAprendizagemResponse;
 import com.senac.api.service.ObjetoAprendizagemService;
+import com.senac.api.service.SituacaoObjetoAprendizagemService;
 
 import jakarta.validation.Valid;
 
@@ -37,6 +40,9 @@ public class ObjetoAprendizagemController {
 
 	@Autowired
 	private ObjetoAprendizagemService objetoAprendizagemService;
+	
+	@Autowired
+	private SituacaoObjetoAprendizagemService situacaoObjetoAprendizagemService;
 	
 	@PostMapping
 	public ResponseEntity<ObjetoAprendizagemResponse> adicionar(@Valid @RequestBody ObjetoAprendizagemRequest objReq){
@@ -51,7 +57,8 @@ public class ObjetoAprendizagemController {
 				@RequestParam("descricao") String descricao,
 				@RequestParam("file") MultipartFile file,
 				@RequestParam("grauDificuldadeId") GrauDificuldade grauDificuldadeId,
-				@RequestParam("usuarioId") String usuarioId
+				@RequestParam("usuarioId") String usuarioId,
+				@RequestParam("situacaoAprendizagemId") SituacaoAprendizagem situacaoAprendizagemId
 			) throws Exception{
 		
 		ModelMapper mapper = new ModelMapper();
@@ -65,7 +72,12 @@ public class ObjetoAprendizagemController {
 		
 		obj = objetoAprendizagemService.upload(file, obj);
 		
-		//String downloadURl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/objetoAprendizagem/download/").path(obj.getId().toString()).toUriString();
+		//SituacaoObjetoAprendizagem
+		SituacaoObjetoAprendizagem situacaoObjetoAprendizagem = new SituacaoObjetoAprendizagem();
+		situacaoObjetoAprendizagem.setOrder(situacaoAprendizagemId.getOrdem());
+		situacaoObjetoAprendizagem.setObjetoAprendizagemId(obj);
+		situacaoObjetoAprendizagem.setSituacaoAprendizagemId(situacaoAprendizagemId);
+		situacaoObjetoAprendizagemService.adicionar(situacaoObjetoAprendizagem);
 		
 		return new ResponseEntity<ObjetoAprendizagemResponse>(mapper.map(obj, ObjetoAprendizagemResponse.class), HttpStatus.CREATED);
 	}
@@ -117,6 +129,7 @@ public class ObjetoAprendizagemController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id){
+		situacaoObjetoAprendizagemService.deletarByObjeto(id);
 		objetoAprendizagemService.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

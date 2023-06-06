@@ -10,7 +10,7 @@ public class ObjetoAprendizagemResponse{
 	private String tipo;
 	private Boolean status;
 	private GrauDificuldade grauDificuldadeId;
-	private Long usuarioId;	
+	private String usuarioId;	
 	
 	public Long getId() {
 		return id;
@@ -48,10 +48,10 @@ public class ObjetoAprendizagemResponse{
 	public void setGrauDificuldadeId(GrauDificuldade grauDificuldadeId) {
 		this.grauDificuldadeId = grauDificuldadeId;
 	}
-	public Long getUsuarioId() {
+	public String getUsuarioId() {
 		return usuarioId;
 	}
-	public void setUsuarioId(Long usuarioId) {
+	public void setUsuarioId(String usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 	

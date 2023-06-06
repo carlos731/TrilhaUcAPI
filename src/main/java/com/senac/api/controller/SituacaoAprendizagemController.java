@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senac.api.entity.IndicadorSituacaoAprendizagem;
 import com.senac.api.entity.SituacaoAprendizagem;
 import com.senac.api.request.SituacaoAprendizagemRequest;
 import com.senac.api.response.SituacaoAprendizagemResponse;
+import com.senac.api.service.IndicadorSituacaoAprendizagemService;
 import com.senac.api.service.SituacaoAprendizagemService;
+import com.senac.api.service.SituacaoObjetoAprendizagemService;
 
 import jakarta.validation.Valid;
 
@@ -31,11 +34,22 @@ public class SituacaoAprendizagemController {
 	@Autowired
 	private SituacaoAprendizagemService situacaoAprendizagemService;
 	
+	@Autowired
+	private IndicadorSituacaoAprendizagemService indicadorSituacaoAprendizagemService;
+	
+	@Autowired 
+	private SituacaoObjetoAprendizagemService situacaoObjetoAprendizagemService;
+	
 	@PostMapping
 	public ResponseEntity<SituacaoAprendizagemResponse> adicionar(@Valid @RequestBody SituacaoAprendizagemRequest situacaoAprendizagemReq){
 		ModelMapper mapper = new ModelMapper();
 		SituacaoAprendizagem situacaoAprendizagem = mapper.map(situacaoAprendizagemReq, SituacaoAprendizagem.class);
 		situacaoAprendizagem = situacaoAprendizagemService.adicionar(situacaoAprendizagem);
+		//IndicadorSituacaoAprendizagem 
+		IndicadorSituacaoAprendizagem indicadorSituacaoAprendizagem = new IndicadorSituacaoAprendizagem();
+		indicadorSituacaoAprendizagem.setCopetenciaIndicadorId(situacaoAprendizagemReq.getIndicadorId());
+		indicadorSituacaoAprendizagem.setSituacaoAprendizagemId(situacaoAprendizagem);
+		indicadorSituacaoAprendizagemService.adicionar(indicadorSituacaoAprendizagem);
 		return new ResponseEntity<>(mapper.map(situacaoAprendizagem, SituacaoAprendizagemResponse.class), HttpStatus.CREATED);
 	}
 	
@@ -65,6 +79,8 @@ public class SituacaoAprendizagemController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id){
+		indicadorSituacaoAprendizagemService.deletarBySituacao(id);
+		situacaoObjetoAprendizagemService.deletarBySituacao(id);
 		situacaoAprendizagemService.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

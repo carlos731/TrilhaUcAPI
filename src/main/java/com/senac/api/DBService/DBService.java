@@ -8,14 +8,11 @@ import org.springframework.stereotype.Service;
 import com.senac.api.entity.Encontro;
 import com.senac.api.entity.EncontroTipo;
 import com.senac.api.entity.GrauDificuldade;
-import com.senac.api.entity.ObjetoAprendizagem;
 import com.senac.api.entity.PlanejamentoUc;
 import com.senac.api.repository.EncontroRepository;
 import com.senac.api.repository.EncontroTipoRepository;
 import com.senac.api.repository.GrauDificuldadeRepository;
 import com.senac.api.repository.PlanejamentoUcRepository;
-import com.senac.api.repository.SituacaoAprendizagemRepository;
-import com.senac.api.repository.SituacaoObjetoAprendizagemRepository;
 
 @Service
 public class DBService {
@@ -31,11 +28,6 @@ public class DBService {
 	
 	@Autowired
 	private EncontroRepository encontroRepository;
-	
-	@Autowired
-	private SituacaoAprendizagemRepository situacaoAprendizagemRepository;
-	
-	@Autowired SituacaoObjetoAprendizagemRepository situacaoObjetoAprendizagemRepository;
 	
 	public void instanciaDB() {	
 
@@ -71,8 +63,6 @@ public class DBService {
 		//SituacaoAprendizagem st2 = new SituacaoAprendizagem(null, "Instalação de IDE de programação Pycharm", "Professor explica como instalar a IDE Pycharm para programação", 1, true, planejamentoUc1, grau1, badge1, indicadores2);
 		//situacaoAprendizagemRepository.saveAll(Arrays.asList(st1, st2));
 		
-		//objeto_aprendizagem
-		ObjetoAprendizagem obj1 = new ObjetoAprendizagem();
 		
 	}
 	
